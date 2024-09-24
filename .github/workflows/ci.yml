@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: "22"
       - name: Install dependencies
-        run: npm clean-install
+        run: dotnet restore
       - name: build
         run: dotnet build
       - name: unit tests
