@@ -18,4 +18,6 @@ jobs:
       - name: build
         run: dotnet build
       - name: unit tests
-        run: dotnet test .\Solution2.sln
+        run: dotnet test ./Solution2.sln
+permissions:
+  contents: read
