@@ -15,7 +15,7 @@ public class PaperController(MyDbContext context) : ControllerBase
     [Route("api/papers")]
     public ActionResult<List<Paper>> GetPapers()
     {
-        return Ok(dao.GetAllPaper());
+        return Ok(dao.GetAllPapers());
     }
     
     [HttpPost]

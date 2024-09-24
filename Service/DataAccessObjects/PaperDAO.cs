@@ -9,7 +9,7 @@ namespace Service.Data_Access_Objects;
 public class PaperDAO(MyDbContext context)
 {
 
-    public List<Paper> GetAllPaper()
+    public List<Paper> GetAllPapers()
     {
         return context.Papers.ToList();
     }

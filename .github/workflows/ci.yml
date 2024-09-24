@@ -1,0 +1,13 @@
+﻿name: test that it works
+on:
+  push:
+    branches: ["master"]
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: test job
+    steps:
+      - name: Hello world
+        run: echo "Hello world"
+      - name: unit tests
+        run: dotnet test
