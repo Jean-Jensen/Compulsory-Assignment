@@ -14,7 +14,7 @@ public class PaperDAO(MyDbContext context)
         return context.Papers.ToList();
     }
 
-    public Paper AddPaper([FromBody] Paper paper)
+    public Paper AddPaper( Paper paper)
     {
         context.Papers.Add(paper);
         context.SaveChanges();
@@ -27,8 +27,10 @@ public class PaperDAO(MyDbContext context)
         context.Papers.Remove(paper);
         context.SaveChanges();
     }
+    
+    //set discontinue/soft delete instead of delete
 
-    public Paper UpdatePaper([FromBody] Paper paper)
+    public Paper UpdatePaper( Paper paper)
     {
         
         context.Papers.Update(paper);

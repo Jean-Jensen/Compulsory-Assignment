@@ -1,4 +1,6 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,5 +25,8 @@ app.UseSwaggerUi();
 //Console.WriteLine(connectionString);
 
 //app.MapGet("/", () => "Hello World!");
+
+
+
 
 app.Run();

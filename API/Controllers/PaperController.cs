@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Service;
 using Service.Data_Access_Objects;
 using Service.Models;
@@ -20,16 +21,29 @@ public class PaperController(MyDbContext context) : ControllerBase
     
     [HttpPost]
     [Route("api/papers")]
-    public ActionResult<List<Paper>> AddPaper(Paper paper)
+    public ActionResult<List<Paper>> AddPaper([FromBody] CreatePaperDto dto)
     {
-        return Ok(dao.AddPaper(paper));
+        var paper = new Paper()
+        {
+            Name = dto.Name,
+            Discontinued = dto.Discontinued,
+            Price = dto.Price,
+            Stock = dto.Stock,
+            Properties = new List<Property>(){new Property() { PropertyName = "string" }}
+        };
+        
+        var result = (dao.AddPaper(paper));
+        return Ok(result);
     }
     
     [HttpPatch]
     [Route("api/paper")]
-    public ActionResult<List<Paper>> UpdatePaper(Paper paper)
+    public ActionResult<Paper> UpdatePaper([FromBody] Paper paper)
     {
-        return Ok(dao.UpdatePaper(paper));
+        Console.WriteLine(JsonSerializer.Serialize(paper));
+        context.Papers.Update(paper);
+        context.SaveChanges();
+        return Ok();
     }
     
     [HttpDelete]
