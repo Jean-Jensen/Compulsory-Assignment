@@ -18,19 +18,13 @@ public class PaperDAO(MyDbContext context)
     {
         context.Papers.Add(paper);
         context.SaveChanges();
-        return paper;
+        return context.Papers.SingleOrDefault(p => p.Id == paper.Id);
     }
-
-    public void DeletePaper(int id)
-    {
-        Paper paper = context.Papers.Where(paper => paper.Id == id).ToList().First();
-        context.Papers.Remove(paper);
-        context.SaveChanges();
-    }
+    
     
     //set discontinue/soft delete instead of delete
 
-    public Paper UpdatePaper( Paper paper)
+    public Paper UpdatePaper(Paper paper)
     {
         
         context.Papers.Update(paper);
@@ -42,5 +36,52 @@ public class PaperDAO(MyDbContext context)
     //Raw SQL if I ever need it:
     //context.Papers.fromSqlRaw($"--sql statement here--").toList
     // remember to put a \ in front of quotes
+    
+    public void DeletePaper(int id)
+    {
+        Paper paper = GetPaperFromID(id);
+        context.Papers.Remove(paper);
+        context.SaveChanges();
+    }
+
+    public void DiscontinuePaper(int id)
+    {
+        Paper p = GetPaperFromID(id);
+        if (!p.Discontinued)
+        {
+            p.Discontinued = true;
+        }
+        
+        context.Papers.Update(p);
+        context.SaveChanges();
+    }
+    
+    public List<Paper> GetAllPapersInLimit(int startIndex, int endIndex)
+    {
+        List<Paper> inLimit = context.Papers.ToList().Slice(startIndex, endIndex);
+        return inLimit;
+    }
+
+    public void AddPropertyToPaper(Property prop, int paperId)
+    {
+        Paper p = GetPaperFromID(paperId);
+        p.Properties.Add(prop);
+        context.SaveChanges();
+    }
+    
+    public void AddPropertiesToPaper(List<Property> props, int paperId)
+    {
+        Paper p = GetPaperFromID(paperId);
+        for (int i = 0; i <= props.Count; i++)
+        {
+            p.Properties.Add(props[i]);
+        }
+        context.SaveChanges();
+    }
+
+    public Paper GetPaperFromID(int id)
+    {
+        return context.Papers.Where(pap => pap.Id == id).ToList().First();
+    }
     
 }

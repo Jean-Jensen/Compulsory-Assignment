@@ -38,7 +38,7 @@ public class PaperController(MyDbContext context) : ControllerBase
     
     [HttpPatch]
     [Route("api/paper")]
-    public ActionResult<Paper> UpdatePaper([FromBody] Paper paper)
+    public ActionResult<Paper> UpdatePaper(Paper paper)
     {
         Console.WriteLine(JsonSerializer.Serialize(paper));
         context.Papers.Update(paper);
@@ -53,4 +53,5 @@ public class PaperController(MyDbContext context) : ControllerBase
         dao.DeletePaper(id);
         return Ok();
     }
+    
 }

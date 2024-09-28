@@ -26,7 +26,14 @@ app.UseSwaggerUi();
 
 //app.MapGet("/", () => "Hello World!");
 
+app.UseCors( opts => {
 
+    opts.AllowAnyOrigin();
 
+    opts.AllowAnyMethod();
+
+    opts.AllowAnyHeader();
+
+});
 
 app.Run();

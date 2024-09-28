@@ -3,7 +3,6 @@
 public class CreatePaperDto
 {
     
-
     public string Name { get; set; } = null!;
 
     public bool Discontinued { get; set; }
