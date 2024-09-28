@@ -18,15 +18,31 @@ public class CustomerController(MyDbContext context) : ControllerBase
     
     [HttpPost]
     [Route("api/customers")]
-    public ActionResult<Customer> AddCustomer([FromBody] Customer cust)
+    public ActionResult<Customer> AddCustomer([FromBody] CreateCustomerDto custdto)
     {
+        var cust = new Customer()
+        {
+            Name = custdto.Name,
+            Address = custdto.Address,
+            Email = custdto.Email,
+            Phone = custdto.Phone
+        };
+        
         return dao.AddCustomer(cust);
     }
     
     [HttpPatch]
     [Route("api/customers")]
-    public ActionResult<Customer> UpdateCustomer([FromBody] Customer cust)
+    public ActionResult<Customer> UpdateCustomer([FromBody] CreateCustomerDto custdto)
     {
+        var cust = new Customer()
+        {
+            Name = custdto.Name,
+            Address = custdto.Address,
+            Email = custdto.Email,
+            Phone = custdto.Phone
+        };
+        
         return dao.UpdateCustomer(cust);
     }
     
