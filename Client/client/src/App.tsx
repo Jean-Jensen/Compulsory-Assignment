@@ -25,31 +25,32 @@ function App() {
 
   return (
       <>
-          <div className="mainHorizontalBox">
-              
-          <div className="verticalBox">
-              <>Customer functions</>
-              <button >View Papers</button>
-              <button className="bg-white font-bold">My Cart</button>
-          </div>
-              
-          <div className="horizontalBox">
-          {
-              allPapers.map((p: Paper) => {
-                  return<div className="flex flex-col">
-                      <>{p.name}</>
-                      <>{p.discontinued ? "discontinued" : "in stock"}</>
-                      <>{p.price}</>
-                  </div>
-              })
-          }
-          </div>
-          {
-              allPapers.map((p: Paper) => {
-                  console.log(p.name)
-              })
-          }
           
+          <div className="mainHorizontalBox">
+
+              <div className="verticalBox">
+                  <>Customer functions</>
+                  <button>View Papers</button>
+                  <button>My Cart</button>
+              </div>
+
+              <div className="horizontalBox">
+                  {
+                      allPapers.map((p: Paper) => {
+                          return <div className="flex flex-col bg-gray">
+                              <>{p.name}</>
+                              <>{p.discontinued ? "discontinued" : "in stock"}</>
+                              <>{p.price}</>
+                          </div>
+                      })
+                  }
+              </div>
+              {
+                  allPapers.map((p: Paper) => {
+                      console.log(p.name)
+                  })
+              }
+
           </div>
       </>
   )
