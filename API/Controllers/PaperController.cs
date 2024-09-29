@@ -20,7 +20,7 @@ public class PaperController(MyDbContext context) : ControllerBase
     }
     
     [HttpPost]
-    [Route("api/papers")]
+    [Route("api/paper")]
     public ActionResult<List<Paper>> AddPaper([FromBody] CreatePaperDto dto)
     {
         var paper = new Paper()
