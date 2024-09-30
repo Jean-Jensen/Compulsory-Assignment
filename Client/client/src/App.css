@@ -15,7 +15,6 @@
   flex-direction: column;
   gap: 15px;
   margin-left: 25px;
-  
 }
 .horizontalBox{
   display: flex;
@@ -23,11 +22,78 @@
   margin: 25px;
   flex-wrap: wrap;
 }
+
+.miniHorizontalBox{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -10px;
+  flex-wrap: wrap;
+}
+
 .mainHorizontalBox{
   display: flex;
+  
   flex-direction: row;
   margin-top: 200px;
   margin-right: 25px;
+  flex-wrap: nowrap;
+  flex-shrink: 3;
+  background: #FFFFFF;
+}
+
+.sideHorizontalBox{
+  display: flex;
+  align-content: flex-start;
+  flex-direction: row;
+  margin: 25px;
   flex-wrap: wrap;
+  padding: 50px;
+  background: #F2F2F2;
+}
+
+.sideVerticalBox{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.itemVerticalBox{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  margin: 25px;
+  border-color: #7F7F7F;
+  border-width: 500px;
+  background: #FFFFFF;
+  padding: 20px;
+  text-align: center;
+}
+
+.sideButton{
+  background: #FFFFFF;
+  border-color: transparent;
+  width: 280px;
+  height: 50px;
+  font-family: 'verdana', sans-serif;
+  transition: 0.3s;
   
+}
+.sideButton:hover{
+  filter: invert(100%);
+}
+
+hr{
+  width: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.hr2{
+  width: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
