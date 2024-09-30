@@ -3,6 +3,7 @@ import { useAtom } from 'jotai'
 import './App.css'
 import { paperListAtom, Paper } from './Atoms/PaperListAtom'
 import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -12,6 +13,7 @@ function App() {
     
     // @ts-ignore
     const [allPapers, setAllPapers] : Paper = useAtom(paperListAtom)
+    const navigate = useNavigate();
     
     useEffect(() => {
         fetch("http://localhost:5210/api/papers").then(httpResponse => {
@@ -80,7 +82,8 @@ function App() {
                                   <hr className="hr2"/>
                               </div>
                               <>{p.discontinued ? "discontinued" : "in stock"}</>
-                              <button>view page</button>
+                              <button key={p.id} onClick={() => navigate(`/paper/${p.id}`)}>
+                                  view page</button>
                           </div>
                       })
               }
