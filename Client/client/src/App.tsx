@@ -60,7 +60,6 @@ function App() {
                               </div>
                               <>{p.name}</>
 
-
                               <div className="miniHorizontalBox">
                                   <hr className="hr2"/>
                                   <>price</>
@@ -81,9 +80,7 @@ function App() {
                                   <hr className="hr2"/>
                               </div>
                               <>{p.discontinued ? "discontinued" : "in stock"}</>
-                              
-                              <button> view page </button>
-                              
+                              <button>view page</button>
                           </div>
                       })
               }
