@@ -84,4 +84,13 @@ public class PaperDAO(MyDbContext context)
         return context.Papers.Where(pap => pap.Id == id).ToList().First();
     }
     
+    public List<Paper> GetPaperWithName(string name){
+           return context.Papers.Where(p => p.Name.Contains(name)).ToList();
+    }
+    
+    public List<Paper> GetPaperHighestStock()
+    {
+        return context.Papers.OrderBy(p => p.Stock).ToList();
+    }
+    
 }
