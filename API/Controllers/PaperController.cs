@@ -29,7 +29,7 @@ public class PaperController(MyDbContext context) : ControllerBase
             Discontinued = dto.Discontinued,
             Price = dto.Price,
             Stock = dto.Stock,
-            Properties = new List<Property>(){new Property() { PropertyName = "string" }}
+            Properties = new List<Property>(){}
         };
         
         var result = (dao.AddPaper(paper));

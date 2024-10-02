@@ -23,6 +23,14 @@
   flex-wrap: wrap;
 }
 
+.titleHorizontalBox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 25px;
+  white-space: nowrap;
+}
+
 .miniHorizontalBox{
   display: flex;
   flex-direction: row;
@@ -56,7 +64,7 @@
   align-items: center;
   flex-direction: column;
   gap: 15px;
-  margin-left: 25px;
+  margin-left: 20px;
   margin-top: 25px;
 }
 
@@ -93,8 +101,8 @@ hr{
   border-top: 1px;
   
   width: 80px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .hr2{

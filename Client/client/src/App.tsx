@@ -27,7 +27,7 @@ function App() {
           <div className="mainHorizontalBox">
 
               <div className="sideVerticalBox">
-                  <div className="horizontalBox">
+                  <div className="titleHorizontalBox">
                       <hr/>
                       <>Customer functions</>
                       <hr/>
@@ -36,19 +36,22 @@ function App() {
                   <button className="sideButton">View Papers</button>
                   <button className="sideButton">Check Cart</button>
 
-                  <div className="horizontalBox">
+                  <div className="titleHorizontalBox">
                       <hr/>
                       <>Admin functions</>
                       <hr/>
                   </div>
                   <button className="sideButton">All Orders</button>
                   <button className="sideButton">All Customers</button>
+                  <button className="sideButton" onClick={() => navigate(`/paper/add`)}>
+                      Add Paper
+                  </button>
                   <button className="sideButton">Create Paper Properties</button>
 
               </div>
 
               <div className="sideHorizontalBox">
-              {
+                  {
                       allPapers.map((p: Paper) => {
                           return <div className="itemVerticalBox">
                               <div className="miniHorizontalBox">

@@ -38,7 +38,7 @@ function PaperPage(){
                     setAllPapers(body)
                 })
             } else{
-                console.error("FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCK")
+                console.error("crap.")
             }
         });
     }
