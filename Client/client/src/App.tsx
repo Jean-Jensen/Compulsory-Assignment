@@ -44,9 +44,9 @@ function App() {
                   <button className="sideButton">All Orders</button>
                   <button className="sideButton">All Customers</button>
                   <button className="sideButton" onClick={() => navigate(`/paper/add`)}>
-                      Add Paper
-                  </button>
-                  <button className="sideButton">Create Paper Properties</button>
+                      Add Paper </button>
+                  <button className="sideButton" onClick={() => navigate(`/property/add`)}>
+                      Create Paper Properties </button>
 
               </div>
 
