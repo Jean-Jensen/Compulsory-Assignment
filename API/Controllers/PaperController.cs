@@ -38,12 +38,23 @@ public class PaperController(MyDbContext context) : ControllerBase
     
     [HttpPatch]
     [Route("api/paper")]
-    public ActionResult<Paper> UpdatePaper(Paper paper)
+    public ActionResult<List<Paper>> UpdatePaper([FromBody] EditPaperDto dto)
     {
+        
+        var paper = new Paper()
+        {
+            Id = dto.Id,
+            Name = dto.Name,
+            Discontinued = dto.Discontinued,
+            Price = dto.Price,
+            Stock = dto.Stock,
+            Properties = new List<Property>(){}
+        };
+        
         Console.WriteLine(JsonSerializer.Serialize(paper));
         context.Papers.Update(paper);
         context.SaveChanges();
-        return Ok();
+        return Ok(dao.GetAllPapers()); //fetching the new list of papers so we can have an updated list
     }
     
     [HttpDelete]

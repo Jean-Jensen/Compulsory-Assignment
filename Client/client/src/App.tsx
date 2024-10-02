@@ -5,10 +5,6 @@ import { paperListAtom, Paper } from './Atoms/PaperListAtom'
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
-
-
-
-
 function App() {
     
     // @ts-ignore
