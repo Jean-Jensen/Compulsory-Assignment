@@ -23,7 +23,7 @@ public class PaperController(MyDbContext context) : ControllerBase
     [Route("api/paper")]
     public ActionResult<List<Paper>> AddPaper([FromBody] CreatePaperDto dto)
     {
-        var paper = new Paper()
+        Paper paper = new Paper()
         {
             Name = dto.Name,
             Discontinued = dto.Discontinued,
@@ -32,8 +32,8 @@ public class PaperController(MyDbContext context) : ControllerBase
             Properties = new List<Property>(){}
         };
         
-        var result = (dao.AddPaper(paper));
-        return Ok(result);
+        //var result = (dao.AddPaper(paper));
+        return Ok(dao.AddPaper(paper));
     }
     
     [HttpPatch]

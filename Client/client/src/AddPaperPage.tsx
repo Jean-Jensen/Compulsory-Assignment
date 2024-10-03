@@ -32,7 +32,7 @@ function AddPaperPage(){
         }).then(httpResponse => {
             if(httpResponse.ok){
                 httpResponse.json().then(body => {
-                    setAllPapers({...allPapers, body})
+                    setAllPapers([...allPapers, body])
                 })
             } else{
                 console.error("crap.")
@@ -83,7 +83,8 @@ function AddPaperPage(){
                     checked={newDisconVal}
                 />
                 <div className="horizontalBox">
-                    <button onClick={() => AddPaper(nameInput,parseInt(stockInput),parseInt(priceInput))}>update paper</button>
+                    <button onClick={() => AddPaper(nameInput,parseInt(stockInput),parseInt(priceInput))}>
+                        add paper</button>
                 </div>
 
 
