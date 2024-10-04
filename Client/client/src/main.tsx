@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PaperPage from './PaperPage.tsx';
 import AddPaperPage from './AddPaperPage.tsx';
 import AddPropertyPage from './AddPropertyPage.tsx';
+import AllOrdersPage from './AllOrdersPage.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/paper/:id" element={<PaperPage/>}/>
               <Route path="/paper/add" element={<AddPaperPage/>}/>
               <Route path="/property/add" element={<AddPropertyPage/>}/>
+              <Route path="/order" element={<AllOrdersPage/>}/>
           </Routes>
       </BrowserRouter>
   </StrictMode>,

@@ -13,6 +13,11 @@ public class OrderDAO(MyDbContext context)
     {
         return context.Orders.Where(o => o.CustomerId == custID).ToList();
     }
+    
+    public Order GetOrderFromId(int id)
+    {
+        return context.Orders.Where(o => o.Id == id).ToList().First();
+    }
 
     public Order AddOrder(Order order)
     {

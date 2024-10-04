@@ -26,6 +26,13 @@ public class OrderController (MyDbContext context) : ControllerBase
    {
        return Ok(dao.GetAllOrdersFromCustomer(custId));
    }
+   
+   [HttpGet]
+   [Route("api/orderFromId")]
+   public ActionResult<List<Order>> GetOrderFromIdr(int Id)
+   {
+       return Ok(dao.GetOrderFromId(Id));
+   }
 
    [HttpPost]
    [Route("api/order")]

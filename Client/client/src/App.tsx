@@ -41,8 +41,10 @@ function App() {
                       <>Admin functions</>
                       <hr/>
                   </div>
-                  <button className="sideButton">All Orders</button>
-                  <button className="sideButton">All Customers</button>
+                  <button className="sideButton" onClick={() => navigate(`/order`)}>
+                      All Orders</button>
+                  <button className="sideButton">
+                      All Customers</button>
                   <button className="sideButton" onClick={() => navigate(`/paper/add`)}>
                       Add Paper </button>
                   <button className="sideButton" onClick={() => navigate(`/property/add`)}>

@@ -19,6 +19,13 @@ public class PaperController(MyDbContext context) : ControllerBase
         return Ok(dao.GetAllPapers());
     }
     
+    [HttpGet]
+    [Route("api/papersFromId")]
+    public ActionResult<List<Paper>> GetPaperFromId(int id)
+    {
+        return Ok(dao.GetPaperFromID(id));
+    }
+    
     [HttpPost]
     [Route("api/paper")]
     public ActionResult<List<Paper>> AddPaper([FromBody] CreatePaperDto dto)
