@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service;
 using Service.Data_Access_Objects;
+using Service.DataTransferObjects;
 using Service.Models;
 
 namespace API.Controllers;
@@ -33,10 +34,11 @@ public class CustomerController(MyDbContext context) : ControllerBase
     
     [HttpPatch]
     [Route("api/customers")]
-    public ActionResult<Customer> UpdateCustomer([FromBody] CreateCustomerDto custdto)
+    public ActionResult<Customer> UpdateCustomer([FromBody] EditCustomerDto custdto)
     {
         var cust = new Customer()
         {
+            Id = custdto.Id,
             Name = custdto.Name,
             Address = custdto.Address,
             Email = custdto.Email,

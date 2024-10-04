@@ -1,11 +1,71 @@
-﻿namespace API.Controllers;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Service;
+using Service.Data_Access_Objects;
+using Service.DataTransferObjects;
+using Service.Models;
 
-public class OrderController
+namespace API.Controllers;
+
+[Route("")]
+public class OrderController (MyDbContext context) : ControllerBase
 {
-    //have both order and orderentries be made in the same methods since
-    //they're both representations of the same order
+
+   private OrderDAO dao = new OrderDAO(context);
     
-    //still unsure of the "X order entries" user story meant but I guess its
-    //multiple order entries for the same order? even though order entry already lists quantity??
-    
+   [HttpGet]
+   [Route("api/order")]
+   public ActionResult<List<Order>> GetOrders()
+   {
+       return Ok(dao.GetAllOrders());
+   }
+   
+   [HttpGet]
+   [Route("api/orderFromCust")]
+   public ActionResult<List<Order>> GetOrdersFromCustomer(int custId)
+   {
+       return Ok(dao.GetAllOrdersFromCustomer(custId));
+   }
+
+   [HttpPost]
+   [Route("api/order")]
+   public ActionResult<Order> AddOrder([FromBody] OrderDto dto)
+   {
+
+       Order order = new Order()
+       {
+           OrderDate = dto.OrderDate,
+           DeliveryDate = dto.DeliveryDate,
+           Status = dto.Status,
+           TotalAmount = dto.TotalAmount,
+           CustomerId = dto.CustomerId
+       };
+       
+       return Ok(dao.AddOrder(order));
+   }
+
+   [HttpPatch]
+   [Route("api/order")]
+   public ActionResult<Order> UpdateOrder([FromBody] OrderDto dto)
+   {
+       Order order = new Order()
+       {
+           OrderDate = dto.OrderDate,
+           DeliveryDate = dto.DeliveryDate,
+           Status = dto.Status,
+           TotalAmount = dto.TotalAmount,
+           CustomerId = dto.CustomerId
+       };
+       
+       return Ok(dao.UpdateOrder(order));
+   }
+   
+   
+   [HttpDelete]
+   [Route("api/order")]
+   public void UpdateOrder(int id)
+   {
+       dao.DeleteOrder(id);
+   }
+   
 }
