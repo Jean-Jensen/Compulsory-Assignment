@@ -1,6 +1,6 @@
 ﻿import { atom } from "jotai";
 import { Paper } from "./PaperListAtom";
-import { Customer } from "./CustomerAtom";
+import { Customer} from "./CustomerAtom";
 
 
 export let cartAtom = atom<Paper[]>([]);

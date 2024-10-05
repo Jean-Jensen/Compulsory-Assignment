@@ -1,6 +1,7 @@
 ﻿import {useAtom} from "jotai";
 import {Customer, customerAtom } from "../Atoms/CustomerAtom";
 import {MouseEventHandler, useCallback, useEffect, useState} from "react";
+import { chosenCustomer } from "../Atoms/CartAtom";
 
 
 type SortKey = keyof Customer
@@ -15,17 +16,21 @@ function CustomerTable(){
     const [sortOrder, setSortOrder] = useState<SortOrder>("ascn"); //for knowing if it's ascending or descending order
     
     const [custData, setCustData] = useAtom(customerAtom);
+    //const [selectedCust, setSelectedCust] = useState<Customer>(custData[0]);
     
+    const [chosenCust, setChosenCust] = useAtom(chosenCustomer);
     
     useEffect(() => {
         fetch("http://localhost:5210/api/customers").then(httpResponse => {
             if(httpResponse.ok){
                 httpResponse.json().then(body => {
                     setCustData(body);
+                    
                 })
             }
         })
     }, [])
+
 
     // @ts-ignore
     function sortData(data: Customer[], key: SortKey, reverse: boolean ){
@@ -65,38 +70,42 @@ function CustomerTable(){
         {key: "email", label: "Email"},
     ];
     
-    return <table>
-        {/* table headers */}
-        {/* tr = table row. represents single row, which is what the headers are */}
-        <thead>
-        <tr>
-            {headers.map((row) => {
-                return <td key={row.key}>
-                    {row.label}
-                    <SortButton 
-                        sortOrder={sortOrder} 
-                        columnKey={row.key} 
-                        sortKey={sortKey} 
-                        onClick={() => changeSort(row.key)}/>
-                </td>
-            })}
-        </tr>
-        </thead>
-
-        {/* table body */}
-        <tbody>
-        {sortedData().map((c) => {
-            return <tr key={c.id} onClick={() => console.log("clicked!")}>
-                <td>{c.id}</td>
-                <td>{c.name}</td>
-                <td>{c.address}</td>
-                <td>{c.email}</td>
-                <td>{c.phone}</td>
+    return <div>
+        <table>
+            {/* table headers */}
+            {/* tr = table row. represents single row, which is what the headers are */}
+            <thead>
+            <tr>
+                {headers.map((row) => {
+                    return <td key={row.key}>
+                        {row.label}
+                        <SortButton
+                            sortOrder={sortOrder}
+                            columnKey={row.key}
+                            sortKey={sortKey}
+                            onClick={() => changeSort(row.key)}/>
+                    </td>
+                })}
             </tr>
-        })}
-        </tbody>
-    </table>
+            </thead>
 
+            {/* table body */}
+            <tbody>
+            {sortedData().map((c) => {
+                return <tr key={c.id} onClick={() => setChosenCust(c)}>
+                    <td>{c.id}</td>
+                    <td>{c.name}</td>
+                    <td>{c.address}</td>
+                    <td>{c.email}</td>
+                    <td>{c.phone}</td>
+                </tr>
+            })}
+            </tbody>
+        </table>
+        
+        <h1>{chosenCust != null ? chosenCust.name : ""}</h1>
+
+    </div>
 }
 
 // @ts-ignore
@@ -113,14 +122,12 @@ function SortButton({
 }) {
     return (
         <button onClick={onClick} className=
-            {`${sortKey === columnKey && sortOrder === "desn" 
-                ? "sortButton sortReverse" : "sortButton" }`}>
+            {`${sortKey === columnKey && sortOrder === "desn"
+                ? "sortButton sortReverse" : "sortButton"}`}>
             ▲
         </button>
     );
 }
-
-
 
 
 export default CustomerTable
