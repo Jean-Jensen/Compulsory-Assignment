@@ -5,6 +5,7 @@ import { paperListAtom, Paper } from './Atoms/PaperListAtom'
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import { cartAtom } from './Atoms/CartAtom';
+import CustomerTable from './Tables/CustomerTable';
 
 function App() {
     
@@ -36,12 +37,15 @@ function App() {
         
     }
     
+    
 
   return (
       <>
           
+          <CustomerTable/>
+          
           <div className="mainHorizontalBox">
-
+                
               <div className="sideVerticalBox">
                   <div className="titleHorizontalBox">
                       <hr/>
