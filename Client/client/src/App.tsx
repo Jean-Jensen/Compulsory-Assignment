@@ -4,11 +4,15 @@ import './App.css'
 import { paperListAtom, Paper } from './Atoms/PaperListAtom'
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import { cartAtom } from './Atoms/CartAtom';
 
 function App() {
     
     // @ts-ignore
     const [allPapers, setAllPapers] : Paper = useAtom(paperListAtom)
+    // @ts-ignore
+    const [cart, setCart] : Paper = useAtom(cartAtom);
+    
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -20,6 +24,18 @@ function App() {
             }
         })
     }, [])
+    
+    // @ts-ignore
+    function addToCart(pId : number) {
+        
+        allPapers.forEach(function (paper: Paper) {
+            if(paper.id == pId){
+                setCart([...cart, paper]);
+            }
+        })
+        
+    }
+    
 
   return (
       <>
@@ -83,8 +99,11 @@ function App() {
                                   <hr className="hr2"/>
                               </div>
                               <>{p.discontinued ? "discontinued" : "in stock"}</>
+                              
                               <button key={p.id} onClick={() => navigate(`/paper/${p.id}`)}>
                                   view page</button>
+                              <button onClick={() => addToCart(p.id)}>add to cart</button>
+                              
                           </div>
                       })
               }
