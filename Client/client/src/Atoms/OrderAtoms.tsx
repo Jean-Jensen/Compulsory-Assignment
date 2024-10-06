@@ -23,3 +23,4 @@ export interface OrderEntry{
     product: Paper,
     order: Order
 }
+

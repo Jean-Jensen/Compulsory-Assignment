@@ -20,6 +20,8 @@ function CustomerTable(){
     
     const [chosenCust, setChosenCust] = useAtom(chosenCustomer);
     
+    
+    
     useEffect(() => {
         fetch("http://localhost:5210/api/customers").then(httpResponse => {
             if(httpResponse.ok){
@@ -32,7 +34,6 @@ function CustomerTable(){
     }, [])
 
 
-    // @ts-ignore
     function sortData(data: Customer[], key: SortKey, reverse: boolean ){
         
         if (!key) return data; //if key doesnt exist...
@@ -96,8 +97,8 @@ function CustomerTable(){
                     <td>{c.id}</td>
                     <td>{c.name}</td>
                     <td>{c.address}</td>
-                    <td>{c.email}</td>
                     <td>{c.phone}</td>
+                    <td>{c.email}</td>
                 </tr>
             })}
             </tbody>

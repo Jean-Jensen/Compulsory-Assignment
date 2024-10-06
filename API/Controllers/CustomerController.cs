@@ -18,6 +18,13 @@ public class CustomerController(MyDbContext context) : ControllerBase
     }
     
     [HttpPost]
+    [Route("api/customerFromId")]
+    public ActionResult<Customer> GetCustomerFromId(int id)
+    {
+        return Ok(dao.GetCustomerFromId(id));
+    }
+    
+    [HttpPost]
     [Route("api/customers")]
     public ActionResult<Customer> AddCustomer([FromBody] CreateCustomerDto custdto)
     {

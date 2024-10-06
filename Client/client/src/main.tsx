@@ -7,6 +7,7 @@ import PaperPage from './PaperPage.tsx';
 import AddPaperPage from './AddPaperPage.tsx';
 import AddPropertyPage from './AddPropertyPage.tsx';
 import AllOrdersPage from './AllOrdersPage.tsx';
+import CartPage from './CartPage.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/paper/add" element={<AddPaperPage/>}/>
               <Route path="/property/add" element={<AddPropertyPage/>}/>
               <Route path="/order" element={<AllOrdersPage/>}/>
+              <Route path="/cart" element={<CartPage/>}/>
           </Routes>
       </BrowserRouter>
   </StrictMode>,

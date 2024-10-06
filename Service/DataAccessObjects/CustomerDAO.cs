@@ -8,6 +8,11 @@ public class CustomerDAO(MyDbContext context)
     {
         return context.Customers.ToList();
     }
+    
+    public Customer GetCustomerFromId(int id)
+    {
+        return context.Customers.Where(c => c.Id == id).ToList().First();
+    }
 
     public Customer AddCustomer( Customer cust)
     {

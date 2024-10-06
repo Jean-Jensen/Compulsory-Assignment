@@ -1,10 +1,11 @@
 ﻿//import { useState } from 'react'
 import { useAtom } from 'jotai'
 import './App.css'
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 import {Order, OrderAtom, OrderEntry, OrderEntryAtom } from './Atoms/OrderAtoms';
 import { Paper, paperListAtom } from './Atoms/PaperListAtom';
+import { Customer, customerAtom } from './Atoms/CustomerAtom';
 
 function AllOrdersPage() {
 
@@ -14,6 +15,8 @@ function AllOrdersPage() {
     const [allOrderEntries, setAllOrderEntries] : OrderEntry = useAtom(OrderEntryAtom);
     // @ts-ignore
     const [allPapers, setAllPapers] : Paper = useAtom(paperListAtom)
+    // @ts-ignore
+    const [allCustomers, setAllCustomers] : Customer = useAtom(customerAtom)
     
     //const navigate = useNavigate();
 
@@ -47,6 +50,16 @@ function AllOrdersPage() {
         })
     }, [])
     
+    useEffect(() => {
+        fetch("http://localhost:5210/api/customers").then(httpResponse => {
+            if(httpResponse.ok){
+                httpResponse.json().then(body => {
+                    setAllCustomers(body);
+                })
+            }
+        })
+    }, [])
+    
     function GetPaperFromId(ID: number){
         // @ts-ignore
         let p : Paper ;
@@ -62,29 +75,19 @@ function AllOrdersPage() {
         return p;
     }
 
-    // @ts-ignore
-    function GetPaperNameFromId(ID: number){
-        const [p, setP] = useState<Paper>();
-        fetch("http://localhost:5210/api/papersFromId", {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id: ID
-            })
-        }).then(httpResponse => {
-            if(httpResponse.ok){
-                httpResponse.json().then(body => {
-                    setP(body);
-                })
+   function GetCustomerFromId(ID: number){
+        let c: Customer;
+        
+        allCustomers.forEach(function (value: Customer) {
+            if(value.id == ID){
+                c = value;
             }
         })
-        if(p != null){
-            return p.name;
-        }
-        return "name not found";
-    }
+       
+       // @ts-ignore
+       return c;
+        
+   }
     
     function getOrderFromId(id : number){
         let o: Order;
@@ -117,8 +120,15 @@ function AllOrdersPage() {
                                     <>product name</>
                                     <hr className="hr2"/>
                                 </div>
-                                <>{ GetPaperFromId(o.productId)!.name}</> 
-                                
+                                <>{GetPaperFromId(o.productId)!.name}</>
+
+                                <div className="miniHorizontalBox">
+                                    <hr className="hr2"/>
+                                    <>customer</>
+                                    <hr className="hr2"/>
+                                </div>
+                                <>{GetCustomerFromId(getOrderFromId(o.orderId).customerId)!.name}</>
+
                                 <div className="miniHorizontalBox">
                                     <hr className="hr2"/>
                                     <>quantity</>
@@ -132,6 +142,20 @@ function AllOrdersPage() {
                                     <hr className="hr2"/>
                                 </div>
                                 <>{getOrderFromId(o.orderId)!.orderDate}</>
+
+                                <div className="miniHorizontalBox">
+                                    <hr className="hr2"/>
+                                    <>delivery date</>
+                                    <hr className="hr2"/>
+                                </div>
+                                <>{getOrderFromId(o.orderId)!.deliveryDate}</>
+
+                                <div className="miniHorizontalBox">
+                                    <hr className="hr2"/>
+                                    <>status</>
+                                    <hr className="hr2"/>
+                                </div>
+                                <>{getOrderFromId(o.orderId)!.status}</>
 
                             </div>
                         })

@@ -121,3 +121,34 @@ hr{
 .sortReverse {
   transform: rotate(180deg);
 }
+
+.quantityHorizontalBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quantityButton {
+  background-color: transparent;
+  border: none;
+}
+.quantityVerticalBox{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.orderBox{
+  background: #FFFFFF;
+  margin: 5px;
+  padding: 15px;
+}
+
+.orderVerticalBox{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #F2F2F2;
+  padding-right: 500px;
+}

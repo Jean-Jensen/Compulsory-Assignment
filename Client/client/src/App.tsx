@@ -4,7 +4,8 @@ import './App.css'
 import { paperListAtom, Paper } from './Atoms/PaperListAtom'
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import { cartAtom } from './Atoms/CartAtom';
+import { cartAtom, OrderEntryDto } from './Atoms/CartAtom';
+// @ts-ignore
 import CustomerTable from './Tables/CustomerTable';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     // @ts-ignore
     const [allPapers, setAllPapers] : Paper = useAtom(paperListAtom)
     // @ts-ignore
-    const [cart, setCart] : Paper = useAtom(cartAtom);
+    const [cart, setCart] : OrderEntryDto = useAtom(cartAtom);
     
     const navigate = useNavigate();
     
@@ -29,11 +30,12 @@ function App() {
     // @ts-ignore
     function addToCart(pId : number) {
         
-        allPapers.forEach(function (paper: Paper) {
-            if(paper.id == pId){
-                setCart([...cart, paper]);
-            }
-        })
+        let newOrder : OrderEntryDto = {
+            quantity: 1,
+            productId : pId
+        };
+        
+        setCart([...cart, newOrder]);
         
     }
     
@@ -41,8 +43,6 @@ function App() {
 
   return (
       <>
-          
-          <CustomerTable/>
           
           <div className="mainHorizontalBox">
                 
@@ -54,7 +54,8 @@ function App() {
                   </div>
 
                   <button className="sideButton">View Papers</button>
-                  <button className="sideButton">Check Cart</button>
+                  <button className="sideButton" onClick={() => navigate(`/cart`)}>
+                      Check Cart</button>
 
                   <div className="titleHorizontalBox">
                       <hr/>
@@ -112,11 +113,6 @@ function App() {
                       })
               }
               </div>
-              {
-                  allPapers.map((p: Paper) => {
-                      console.log(p.name)
-                  })
-              }
 
           </div>
       </>
