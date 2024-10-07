@@ -1,9 +1,9 @@
 ﻿import {useAtom} from "jotai";
 import { Paper, paperListAtom } from "./Atoms/PaperListAtom";
 import { cartAtom, chosenCustomer, OrderEntryDto } from "./Atoms/CartAtom";
-import {useEffect, useReducer} from "react";
+import {useEffect, useReducer, useState} from "react";
 import CustomerTable from "./Tables/CustomerTable";
-import { Order } from "./Atoms/OrderAtoms";
+import { Order, OrderEntry } from "./Atoms/OrderAtoms";
 
 
 function CartPage(){
@@ -18,6 +18,9 @@ function CartPage(){
     const [, forceUpdate] = useReducer(x => x + 1, 0);
     
     const [chosenCust] = useAtom(chosenCustomer);
+    // @ts-ignore
+    const [orderValue, setOrderValue] : Order = useState<Order>();
+    
 
     useEffect(() => {
         fetch("http://localhost:5210/api/papers").then(httpResponse => {
@@ -59,32 +62,38 @@ function CartPage(){
     }
 
     function AddOrder(){
+        
+        var now = new Date();
+        now.toJSON();
+        console.log(now);
+        
         fetch("http://localhost:5210/api/order", {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-                orderDate: Date.now(),
-                deliveryDate: Date.now(),
-                status: "ordered",
+                orderDate: now,
+                status: "in production",
                 totalAmount: cart.length,
-                customerId: chosenCust!.id,
+                customerId: chosenCust!.id
             })
         }).then(httpResponse => {
             if(httpResponse.ok){
                 httpResponse.json().then(body => {
-                    let order: Order = body
-                    return order
+                    setOrderValue(body);
                 })
             } else{
-                console.error("crap.")
+                console.error("crap");
             }
-        });
+        })
+        
+        return orderValue
     }
 
     // @ts-ignore
     function AddOrderEntry(orderE : OrderEntryDto, ordId: number) : Order{
+        
         
         fetch("http://localhost:5210/api/orderEntry", {
             method: 'POST',
@@ -99,26 +108,33 @@ function CartPage(){
         }).then(httpResponse => {
             if(httpResponse.ok){
                 httpResponse.json().then(body => {
-                    let order: Order = body
+                    let order: OrderEntry = body
                     return order
                 })
             } else{
                 console.error("crap.")
             }
         });
+        
+        
     }
     
     
     function addAllOrderEntries(){
         
-        // @ts-ignore
         let order: Order = AddOrder();
-        
+        console.log(order);
         cart.map((o : OrderEntryDto) => {
             AddOrderEntry(o, order.id);
         });
         
         
+    }
+    
+    function testFunct(){
+        var now = new Date();
+        now.toJSON();
+        console.log(now);
     }
     
     return <>
@@ -133,8 +149,10 @@ function CartPage(){
                         <div className="quantityHorizontalBox">
                             <>quantity: {o.quantity}</>
                             <div className="quantityVerticalBox">
-                                <button className="quantityButton" onClick={() => increaseQuantity(o)}>▲</button>
-                                <button className="quantityButton" onClick={() => decreaseQuantity(o)}>▼</button>
+                                <button className="quantityButton" 
+                                        onClick={() => increaseQuantity(o)}>▲</button>
+                                <button className="quantityButton" 
+                                        onClick={() => decreaseQuantity(o)}>▼</button>
                             </div>
                         </div>
 
@@ -144,6 +162,7 @@ function CartPage(){
 
             <div>
                 <button onClick={addAllOrderEntries}>place order</button>
+                <button onClick={() => testFunct()}>for testing</button>
             </div>
 
 

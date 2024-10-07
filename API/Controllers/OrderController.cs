@@ -38,9 +38,10 @@ public class OrderController (MyDbContext context) : ControllerBase
    [Route("api/order")]
    public ActionResult<Order> AddOrder([FromBody] OrderDto dto)
    {
-
+       Console.WriteLine("order date: " + dto.OrderDate);
        Order order = new Order()
        {
+           Id = 0,
            OrderDate = dto.OrderDate,
            DeliveryDate = dto.DeliveryDate,
            Status = dto.Status,

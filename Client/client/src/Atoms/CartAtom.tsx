@@ -15,3 +15,11 @@ export interface OrderEntryDto{
     quantity: number,
     productId: number
 }
+
+export interface OrderDto{
+    orderDate: Date,
+    deliveryDate: Date,
+    status: string,
+    totalAmount: number,
+    customerId: number
+}
