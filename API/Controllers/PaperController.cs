@@ -28,33 +28,26 @@ public class PaperController(MyDbContext context) : ControllerBase
     }
     
     [HttpGet]
-    [Route("api/papersHighestStock")]
-    public ActionResult<List<Paper>> GetPaperByStockAsc()
-    {
-        return Ok(dao.GetPaperHighestStock());
-    }
-    
-    [HttpGet]
-    [Route("api/papersHighestStock")]
-    public ActionResult<List<Paper>> GetPaperByStockDsc()
-    {
-        return Ok(dao.GetPaperLowestStock());
-    }
-    
-    [HttpGet]
-    [Route("api/papersHighestStock")]
-    public ActionResult<List<Paper>> GetPaperByPriceAsc()
+    [Route("api/papersHighestPrice")]
+    public ActionResult<List<Paper>> GetPaperPriceAsc()
     {
         return Ok(dao.GetPaperHighestPrice());
     }
     
     [HttpGet]
     [Route("api/papersHighestStock")]
-    public ActionResult<List<Paper>> GetPaperByPriceDsc()
+    public ActionResult<List<Paper>> GetPaperStockAsc()
     {
-        return Ok(dao.GetPaperLowestPrice());
+        return Ok(dao.GetPaperHighestStock());
     }
+
     
+    [HttpGet]
+    [Route("api/papers/{name}")]
+    public ActionResult<List<Paper>> GetPaperWithName([FromRoute] string name)
+    {
+        return Ok(dao.GetPaperWithName(name));
+    }
     
     [HttpPost]
     [Route("api/paper")]

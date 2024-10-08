@@ -71,7 +71,7 @@ function CustomerTable(){
         {key: "email", label: "Email"},
     ];
     
-    return <div>
+    return <div className="horizontalBox">
         <table>
             {/* table headers */}
             {/* tr = table row. represents single row, which is what the headers are */}

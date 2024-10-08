@@ -8,6 +8,8 @@ import AddPaperPage from './AddPaperPage.tsx';
 import AddPropertyPage from './AddPropertyPage.tsx';
 import AllOrdersPage from './AllOrdersPage.tsx';
 import CartPage from './CartPage.tsx';
+import CustomerOrders from './CustomerOrders.tsx';
+import CustomerOrders2 from './CustomerOrders2.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -20,6 +22,8 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/property/add" element={<AddPropertyPage/>}/>
               <Route path="/order" element={<AllOrdersPage/>}/>
               <Route path="/cart" element={<CartPage/>}/>
+              <Route path="/customerOrders" element={<CustomerOrders/>}/>
+              <Route path="/customerOrders2" element={<CustomerOrders2/>}/>
           </Routes>
       </BrowserRouter>
   </StrictMode>,

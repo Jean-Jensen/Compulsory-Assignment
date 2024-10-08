@@ -9,6 +9,11 @@ public class OrderEntryDAO(MyDbContext context)
         return context.OrderEntries.ToList();
     }
     
+    public List<OrderEntry> GetAllOrderEntriesFromOrder(int orderId)
+    {
+        return context.OrderEntries.Where(o => o.OrderId == orderId).ToList();
+    }
+    
     public OrderEntry AddOrder(OrderEntry orderE)
     {
         context.OrderEntries.Add(orderE);
