@@ -124,12 +124,9 @@ function App() {
                   <button className="sideButton" onClick={() => navigate(`/cart`)}>
                       Check Cart
                   </button>
-                  <button className="sideButton" onClick={() => navigate(`/customerOrders`)}>
-                      Order History
-                  </button>
 
                   <button className="sideButton" onClick={() => navigate(`/customerOrders2`)}>
-                      Order History 2
+                      Order History 
                   </button>
 
                   <div className="titleHorizontalBox">

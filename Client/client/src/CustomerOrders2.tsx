@@ -1,7 +1,7 @@
 ﻿//import { useState } from 'react'
 import { useAtom } from 'jotai'
 import './App.css'
-import {useEffect, useLayoutEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 
 import {Order, OrderAtom, OrderEntry, OrderEntryAtom } from './Atoms/OrderAtoms';
 import { Paper, paperListAtom } from './Atoms/PaperListAtom';
@@ -126,6 +126,7 @@ function CustomerOrders2() {
 
     useEffect(() => {
         if(!firstRender){
+            // @ts-ignore
             filterOrderEntriesByCust(chosenCust)
         } else {
             setFirstRender(false);
