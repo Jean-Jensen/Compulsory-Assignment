@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 using Service.Data_Access_Objects;
@@ -25,6 +26,35 @@ public class PaperController(MyDbContext context) : ControllerBase
     {
         return Ok(dao.GetPaperFromID(id));
     }
+    
+    [HttpGet]
+    [Route("api/papersHighestStock")]
+    public ActionResult<List<Paper>> GetPaperByStockAsc()
+    {
+        return Ok(dao.GetPaperHighestStock());
+    }
+    
+    [HttpGet]
+    [Route("api/papersHighestStock")]
+    public ActionResult<List<Paper>> GetPaperByStockDsc()
+    {
+        return Ok(dao.GetPaperLowestStock());
+    }
+    
+    [HttpGet]
+    [Route("api/papersHighestStock")]
+    public ActionResult<List<Paper>> GetPaperByPriceAsc()
+    {
+        return Ok(dao.GetPaperHighestPrice());
+    }
+    
+    [HttpGet]
+    [Route("api/papersHighestStock")]
+    public ActionResult<List<Paper>> GetPaperByPriceDsc()
+    {
+        return Ok(dao.GetPaperLowestPrice());
+    }
+    
     
     [HttpPost]
     [Route("api/paper")]
@@ -71,5 +101,7 @@ public class PaperController(MyDbContext context) : ControllerBase
         dao.DeletePaper(id);
         return Ok();
     }
+
     
+
 }

@@ -70,8 +70,6 @@ function AllOrdersPage() {
         })
 
         // @ts-ignore
-        console.log(p)
-        // @ts-ignore
         return p;
     }
 

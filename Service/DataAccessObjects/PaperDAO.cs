@@ -93,4 +93,19 @@ public class PaperDAO(MyDbContext context)
         return context.Papers.OrderBy(p => p.Stock).ToList();
     }
     
+    public List<Paper> GetPaperHighestPrice()
+    {
+        return context.Papers.OrderBy(p => p.Price).ToList();
+    }
+    
+    public List<Paper> GetPaperLowestStock()
+    {
+        return context.Papers.OrderByDescending(p => p.Stock).ToList();
+    }
+    
+    public List<Paper> GetPaperLowestPrice()
+    {
+        return context.Papers.OrderByDescending(p => p.Price).ToList();
+    }
+    
 }
