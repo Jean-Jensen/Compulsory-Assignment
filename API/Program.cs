@@ -6,13 +6,16 @@ using Service;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddProblemDetails();
 builder.Services.AddOpenApiDocument();
 
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("Db"));
 });
-
+builder.Services.AddMvcCore()
+    .AddDataAnnotations()
+    .AddCors();
 
 var app = builder.Build();
 

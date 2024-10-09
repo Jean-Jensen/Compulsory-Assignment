@@ -6,6 +6,7 @@ using Service.Models;
 
 namespace API.Controllers;
 
+[ApiController]
 public class CustomerController(MyDbContext context) : ControllerBase
 {
     private CustomerDAO dao = new CustomerDAO(context);

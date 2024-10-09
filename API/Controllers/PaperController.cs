@@ -8,6 +8,7 @@ using Service.Models;
 namespace API.Controllers;
 
 [Route("")]
+[ApiController]
 public class PaperController(MyDbContext context) : ControllerBase
 {
 
