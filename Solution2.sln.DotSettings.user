@@ -10,5 +10,6 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::CCFEE794-1B54-4A24-B546-D58C8C83198A::net8.0::Service.Tests.PaperTests.GetPapers_GetsAllPapers&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::CCFEE794-1B54-4A24-B546-D58C8C83198A::net8.0::Service.Tests.CustomerTests.GetCustomers_GetsAllCustomers&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCFEE794-1B54-4A24-B546-D58C8C83198A::net8.0::Service.Tests.PaperTests.AddPaper_AddsPaper&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -37,4 +37,26 @@ public class PaperTests(ITestOutputHelper outputHelper)
         
         Assert.Equivalent(papers, result);
     }
+    
+    /*
+    [Fact]
+    public void AddPaper_AddsPaper()
+    {
+        outputHelper.WriteLine("hi");
+        
+        var paper = MockPaper.GetPapers();
+        
+        outputHelper.WriteLine(paper.Id.ToString());
+        
+        setup.DbContextInstance.Papers.Add(paper);
+        setup.DbContextInstance.SaveChanges();
+
+        var result = setup.ServiceProviderInstance.GetRequiredService<PaperDAO>().AddPaper(paper);
+        
+        outputHelper.WriteLine(result.Id.ToString());
+        
+        
+        Assert.Equal(paper.Name, result.Name);
+    }
+    */
 }
