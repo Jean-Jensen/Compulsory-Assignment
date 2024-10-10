@@ -11,7 +11,8 @@ builder.Services.AddOpenApiDocument();
 
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Db"));
+    options.UseNpgsql(Environment.GetEnvironmentVariable("Db") ??
+                      builder.Configuration.GetConnectionString("Db"));
 });
 builder.Services.AddMvcCore()
     .AddDataAnnotations()

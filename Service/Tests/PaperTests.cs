@@ -10,7 +10,7 @@ using Xunit.Sdk;
 namespace Service.Tests;
 
 
-public class PaperTests(ITestOutputHelper outputHelper) 
+public class PaperTests 
 {
 
     private readonly PgCtxSetup<MyDbContext> setup = new(configureServices: 
@@ -18,6 +18,14 @@ public class PaperTests(ITestOutputHelper outputHelper)
         {
             services.AddTransient<PaperDAO>();
         });
+
+    private readonly ITestOutputHelper _outputHelper;
+
+    public PaperTests(ITestOutputHelper outputHelper)
+    {
+        Environment.SetEnvironmentVariable("Db", setup._postgres.GetConnectionString());
+        _outputHelper = outputHelper;
+    }
 
     [Fact]
     public void GetPapers_GetsAllPapers()
@@ -38,25 +46,22 @@ public class PaperTests(ITestOutputHelper outputHelper)
         Assert.Equivalent(papers, result);
     }
     
-    /*
+    
     [Fact]
     public void AddPaper_AddsPaper()
     {
-        outputHelper.WriteLine("hi");
+        _outputHelper.WriteLine("hi");
         
         var paper = MockPaper.GetPapers();
+      
         
-        outputHelper.WriteLine(paper.Id.ToString());
-        
-        setup.DbContextInstance.Papers.Add(paper);
-        setup.DbContextInstance.SaveChanges();
-
+       
         var result = setup.ServiceProviderInstance.GetRequiredService<PaperDAO>().AddPaper(paper);
         
-        outputHelper.WriteLine(result.Id.ToString());
+        _outputHelper.WriteLine(result.Id.ToString());
         
         
         Assert.Equal(paper.Name, result.Name);
     }
-    */
+    
 }

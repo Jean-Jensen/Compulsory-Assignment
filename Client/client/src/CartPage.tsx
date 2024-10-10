@@ -61,13 +61,13 @@ function CartPage(){
         forceUpdate();
     }
 
-    function AddOrder(){
+    function AddOrder(): Promise<Response>{
         
         var now = new Date();
         now.toJSON();
         console.log(now);
         
-        fetch("http://localhost:5210/api/order", {
+        return fetch("http://localhost:5210/api/order", {
             method: 'POST',
             headers: {
                 "Content-Type" : "application/json"
@@ -78,21 +78,11 @@ function CartPage(){
                 totalAmount: cart.length,
                 customerId: chosenCust!.id
             })
-        }).then(httpResponse => {
-            if(httpResponse.ok){
-                httpResponse.json().then(body => {
-                    setOrderValue(body);
-                })
-            } else{
-                console.error("crap");
-            }
         })
-        
-        return orderValue
     }
 
     // @ts-ignore
-    function AddOrderEntry(orderE : OrderEntryDto, ordId: number) : Order{
+    function AddOrderEntry(orderE : OrderEntryDto, ordId: number) : OrderEntry{
         
         
         fetch("http://localhost:5210/api/orderEntry", {
@@ -108,8 +98,9 @@ function CartPage(){
         }).then(httpResponse => {
             if(httpResponse.ok){
                 httpResponse.json().then(body => {
-                    let order: OrderEntry = body
-                    return order
+                    let order: OrderEntry = body;
+                    console.log(body);
+                    return order;
                 })
             } else{
                 console.error("crap.")
@@ -122,19 +113,17 @@ function CartPage(){
     
     function addAllOrderEntries(){
         
-        let order: Order = AddOrder();
-        console.log(order);
-        cart.map((o : OrderEntryDto) => {
-            AddOrderEntry(o, order.id);
-        });
+        AddOrder().then(result => {
+            result.json().then(order => {
+                console.log(order);
+                cart.map((o : OrderEntryDto) => {
+                    AddOrderEntry(o, order.id);
+                });
+            })
+        })
+       
         
         
-    }
-    
-    function testFunct(){
-        var now = new Date();
-        now.toJSON();
-        console.log(now);
     }
     
     return <>
@@ -162,7 +151,6 @@ function CartPage(){
 
             <div>
                 <button onClick={addAllOrderEntries}>place order</button>
-                <button onClick={() => testFunct()}>for testing</button>
             </div>
 
 
